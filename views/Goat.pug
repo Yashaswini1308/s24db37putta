@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1= title
+   div(class="container-fluid")
+  
+  - let results=[{Goat_color:"brown",Goat_breed:"Nubian",Goat_price:2000,Goat_Age:4},{Goat_color:"white",Goat_breed:"Boer",Goat_price:5500,Goat_Age:3},{Goat_color:"black",Goat_breed:"Saanen",Goat_price:4000,Goat_Age:5},{Goat_color:"brown",Goat_breed:"LaMancha",Goat_price:3000,Goat_Age:6}]
+  div(class="row")
+    each form,item in results
+        div(class = "col-sm-2 bg-secondary" onclick=`buy(${item})`) #{form.Goat_color}              
+        div(class = "col-sm-2 bg-secondary" onclick=`buy(${item})`) #{form.Goat_breed}                
+        div(class = "col-sm-2 bg-secondary" onclick=`buy(${item})`) #{form.Goat_price}
+        div(class = "col-sm-2 bg-secondary" onclick=`buy(${item})`) #{form.Goat_Age}
+        hr
+  h5= 'buy'
+
+  div(class="container-fluid")
+    each Goat,index in results
+      div(class="row", onclick=`buy(${index})`)
+        div(class="col-sm-2") <br> Goat #{index}: #{Goat.Goat_color} <br> breed:#{Goat.Goat_breed} <br> price:#{Goat.Goat_price}<br> Age:#{Goat.Goat_Age}
+
+  script.
+      function buy(itemNo)
+      {
+          alert(`You purchased Item ${itemNo+1}`)
+      }
