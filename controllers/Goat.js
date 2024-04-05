@@ -32,8 +32,24 @@ exports.Goat_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: Goat delete DELETE ' + req.params.id);
 };
 // Handle Goat update form on PUT.
-exports.Goat_update_put = function(req, res) {
-res.send('NOT IMPLEMENTED: Goat update PUT' + req.params.id);
+exports.Goat_update_put = async function(req, res) {
+console.log(`update on id ${req.params.id} with body
+${JSON.stringify(req.body)}`)
+try {
+let toUpdate = await Goat.findById( req.params.id)
+// Do updates of properties
+if(req.body.Goat_type)
+toUpdate.Goat_color= req.body.Goat_color;
+if(req.body.Goat_breed) toUpdate.Goat_breed = req.body.Goat_breed;
+if(req.body.Goat_price) toUpdate.size = req.body.Goat_price;
+let result = await toUpdate.save();
+console.log("Sucess " + result)
+res.send(result)
+} catch (err) {
+res.status(500)
+res.send(`{"error": ${err}: Update for id ${req.params.id}
+failed`);
+}
 };
 
 exports.Goat_view_all_Page = async function(req, res) {
