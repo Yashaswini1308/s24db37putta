@@ -1,5 +1,5 @@
 var Goat= require('../models/Goat');
-// List of all Costumes
+// List of all Goats
 exports.Goat_list = async function(req, res) {
     try{
     theCostumes = await Goat.find();
@@ -11,19 +11,27 @@ exports.Goat_list = async function(req, res) {
     }
     };
     
-// for a specific Costume.
-exports.Goat_detail = function(req, res) {
-res.send('NOT IMPLEMENTED: Goat detail: ' + req.params.id);
+// for a specific Goat.
+exports.Goat_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+    result = await Goat.findById( req.params.id)
+    res.send(result)
+    } catch (error) {
+    res.status(500)
+    res.send(`{"error": document for id ${req.params.id} not found`);
+    }
 };
-// Handle Costume create on POST.
+    
+// Handle Goat create on POST.
 exports.Goat_create_post = function(req, res) {
 res.send('NOT IMPLEMENTED: Goat create POST');
 };
-// Handle Costume delete from on DELETE.
+// Handle Goat delete from on DELETE.
 exports.Goat_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: Goat delete DELETE ' + req.params.id);
 };
-// Handle Costume update form on PUT.
+// Handle Goat update form on PUT.
 exports.Goat_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: Goat update PUT' + req.params.id);
 };
@@ -38,7 +46,7 @@ exports.Goat_view_all_Page = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
     };
-    // Handle Costume create on POST.
+    // Handle Goat create on POST.
     exports.Goat_create_post = async function(req, res) {
     console.log(req.body)
     let document = new Goat();
