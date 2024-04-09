@@ -38,7 +38,22 @@ exports.Goat_delete = async function(req, res) {
     res.status(500)
     res.send(`{"error": Error deleting ${err}}`);
     }
-    };
+};
+
+//Handle a show one view with id specified by query
+exports.Goat_view_one_Page = async function(req, res) {
+console.log("single view for id " + req.query.id)
+try{
+result = await Goat.findById( req.query.id)
+res.render('Goatdetail',
+{ title: 'Goat Detail', toShow: result });
+}
+catch(err){
+res.status(500)
+res.send(`{'error': '${err}'}`);
+}
+}; 
+
     
 // Handle Goat update form on PUT.
 exports.Goat_update_put = async function(req, res) {

@@ -13,4 +13,7 @@ var router = express.Router();
 /* GET Goats */
 router.get('/', Goat_controlers.Goat_view_all_Page );
 
+/* GET detail Goat page */
+router.get('/detail', Goat_controlers.Goat_view_one_Page);
+
 module.exports = router;

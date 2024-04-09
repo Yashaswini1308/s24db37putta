@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+
+.GoatAttr {
+  background-color: pink;
+  width: 120px;
+}

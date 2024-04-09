@@ -1,0 +1,25 @@
+extends layout
+block content
+  - if (toShow != null)
+    h1(class='detailh1')= title
+
+    - let Goatid = toShow._id
+    - let Goat_color = toShow.Goat_color
+    - let Goat_breed = toShow.Goat_breed
+    - let Goat_price = toShow.Goat_price
+    div
+      div.row
+        div(class='GoatAttr mr-3') Goat ID is:
+        div #{Goatid}
+      div.row
+        div(class='GoatAttr mr-3') Goat Color is:
+        div #{Goat_color}
+      div.row
+        div(class='GoatAttr mr-3') Goat Breed is:
+        div #{Goat_breed}
+      div.row
+        div(class='GoatAttr mr-3') Goat Price is:
+        div #{Goat_price}
+  - else
+    h1 Goat Details
+    h2 No instance to detail
