@@ -28,9 +28,18 @@ exports.Goat_create_post = function(req, res) {
 res.send('NOT IMPLEMENTED: Goat create POST');
 };
 // Handle Goat delete from on DELETE.
-exports.Goat_delete = function(req, res) {
-res.send('NOT IMPLEMENTED: Goat delete DELETE ' + req.params.id);
-};
+exports.Goat_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await Goat.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+    };
+    
 // Handle Goat update form on PUT.
 exports.Goat_update_put = async function(req, res) {
 console.log(`update on id ${req.params.id} with body
