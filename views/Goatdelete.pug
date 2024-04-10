@@ -1,0 +1,52 @@
+extends layout
+
+block content
+   h1= title
+   if (toShow == null)
+       h2 No instance to delete
+   else
+       - let Goatid = toShow._id
+       - let Goat_color = toShow.Goat_color
+       - let Goat_breed = toShow.Goat_breed
+       - let Goat_price = toShow.Goat_price
+       - let actionid = "/resource/Goat/" + Goatid
+       script.
+           let actionid = "#{actionid}"
+       div
+           div.row
+               div(class='GoatAttr mr-3') Goat ID is:
+               div #{Goatid}
+           div.row
+               div(class='GoatAttr mr-3') Goat color is:
+               div #{Goat_color}
+           div.row
+               div(class='GoatAttr mr-3') Goat Breed is:
+               div #{Goat_breed}
+           div.row
+               div(class='GoatAttr mr-3') Goat price is:
+               div #{Goat_price}
+           button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+           button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+
+   script.
+       function cancel() {
+           // Go back to the home page for the Goat collection
+           window.location.href='/Goat'
+       }
+
+   script.
+       function deleteOnid() {
+           console.log("starting delete")
+           // delete first
+           fetch(actionid, {
+               method: 'DELETE' // Don't need a body for the delete
+           }).then((resp) => {
+               return resp.json(); // or resp.text() or whatever the server sends
+           }).then((body) => {
+               alert("Delete succeded")
+               window.location.href='/Goat' // TODO handle body
+           }).catch((error) => {
+               // TODO handle error
+               alert("Delete failed " + error )
+           });
+       }

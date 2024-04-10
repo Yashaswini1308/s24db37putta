@@ -1,0 +1,33 @@
+extends layout
+
+block content
+ h1= title
+ form(id='GoatForm', action="/resource/Goat", method="POST")
+  div.form-group
+    label.GoatAttr(for='Goat_color') Goat color
+    input#Goat_color(type='text', name='Goat_color')
+  div.form-group
+    label.GoatAttr(for='Goat_breed') Goat breed
+    input#Goat_breed(type='text', name='Goat_breed')
+  div.form-group
+    label.GoatAttr(for='Goat_price') Goat price
+    input#Goat_price(type='number', name='Goat_price')
+  input(type="submit")
+
+ script.
+  document.forms['GoatForm'].addEventListener('submit', (event) => {
+   event.preventDefault();
+   // TODO do something here to show user that form is being submitted
+   fetch(event.target.action, {
+    method: 'POST',
+    body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+   }).then((resp) => {
+    return resp.json(); // or resp.text() or whatever the server sends
+   }).then((body) => {
+    alert("Save succeded")
+    // TODO handle body
+   }).catch((error) => {
+    // TODO handle error
+    alert("Save failed " + error )
+   });
+  });
