@@ -3,32 +3,34 @@ extends layout
 block content
   h1= title
 
+  //- - let items = ['Goat_type','quantity','cost']
   - let items = results;
   - let o;
 
   script.
-    function buy(x){
+    function buy(x) {
       alert('purchased item ' + x)
     }
 
   div(class='container-fluid')
-    a(class="btn btn-info" href="/Goat/create") Create
+    a(class="btn btn-info mb-3" href="/Goat/create") Create
 
   div(class='row m-1')
     div(class="row row-cols-1 row-cols-sm-4 g-6")
       each item,index in items
         - let destination = `dispatch("/Goat/update?id=${item._id}")`
         - let details = `dispatch("/Goat/detail?id=${item._id}")`
-        div(class="Goatd text-black mb-3" class='col' class='Goatd' class='Goatd-body' class='Goatd-text' onclick='buy('+index+')') Item color is #{item.Goat_color}(Item breed is #{item.Goat_breed})price is #{item.Goat_price}<br>
-        <br>
-        <br>
-        span(class="btn btn-secondary", onclick= details) Details
-        <br>
-        a(class="btn btn-danger", href="/Goat/delete/?id="+item._id) Delete
-        <br>
-        button.btn( class="btn-success ml-1", onclick= destination) Update
+        div(class="Goatd text-black mb-3" class='col')
+          div(class='Goatd-body')
+            div(class='Goatd-text')
+              | Item color is #{item.Goat_color} (Item breed is #{item.Goat_breed}) price is #{item.Goat_price}
+            div(class='d-flex justify-content-end')
+              div(class='btn-group')
+                button(class="btn btn-secondary", onclick= details) Details
+                a(class="btn btn-danger", href="/Goat/delete/?id="+item._id) Delete
+                button(class="btn btn-success", onclick= destination) Update
 
   script.
-    function dispatch(path){
+    function dispatch(path) {
       window.location.href=path
     }
