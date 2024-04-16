@@ -27,13 +27,13 @@ router.get('/', Goat_controlers.Goat_view_all_Page );
 router.get('/detail', Goat_controlers.Goat_view_one_Page);
 
 /* GET create Goat page */
-router.get('/create', Goat_controlers.Goat_create_Page);
+router.get('/create', secured, Goat_controlers.Goat_create_Page);
 
 /* GET update Goat page */
 router.get('/update', secured, Goat_controlers.Goat_update_Page);
 
 /* GET delete Goat page */
-router.get('/delete', Goat_controlers.Goat_delete_Page);
+router.get('/delete', secured, Goat_controlers.Goat_delete_Page);
 
 
 
